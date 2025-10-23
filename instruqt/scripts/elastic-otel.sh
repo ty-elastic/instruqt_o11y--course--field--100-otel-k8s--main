@@ -48,11 +48,6 @@ output=$(curl -s -X POST --header "Authorization: Basic $ELASTICSEARCH_AUTH_BASE
 
 ELASTICSEARCH_APIKEY=$(echo $output | jq -r '.encoded')
 
-# install ksm
-helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
-helm repo update
-helm install --set namespaceOverride=kube-system kube-state-metrics prometheus-community/kube-state-metrics
-
 helm repo add open-telemetry 'https://open-telemetry.github.io/opentelemetry-helm-charts' --force-update
 
 kubectl create namespace $namespace
@@ -60,3 +55,8 @@ kubectl create secret generic elastic-secret-otel \
   --namespace $namespace \
   --from-literal=elastic_endpoint=$ELASTICSEARCH_URL \
   --from-literal=elastic_api_key=$ELASTICSEARCH_APIKEY
+
+helm upgrade --install opentelemetry-kube-stack open-telemetry/opentelemetry-kube-stack \
+  --namespace $namespace \
+  --values 'https://raw.githubusercontent.com/elastic/elastic-agent/refs/tags/v9.1.6/deploy/helm/edot-collector/kube-stack/values.yaml' \
+  --version '0.6.3'
