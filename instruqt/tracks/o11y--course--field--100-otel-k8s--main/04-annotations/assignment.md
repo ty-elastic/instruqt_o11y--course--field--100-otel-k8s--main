@@ -33,3 +33,19 @@ For languages that support annotations (e.g., Python and Java), the OTel SDK let
 Navigate to the [button label="Source"](tab-2) tab and open `src/recorder-java/pom.xml`.
 
 Navigate to the [button label="Source"](tab-2) tab and open `src/recorder-java/src/main/java/com/example/recorder/TradeService.java`.
+
+## Adding annotations
+
+Modify `src/recorder-java/src/main/java/com/example/recorder/TradeService.java` like
+
+```java
+    @WithSpan
+    public void auditCustomer(@SpanAttribute(Main.ATTRIBUTE_PREFIX + "trade") String customerId) {
+        log.info("trading for " + customerId);
+    }
+```
+
+And rebuild and deploy the `recorder-java` service:
+```bash,run
+./build.sh -d force -b true -s recorder-java
+```

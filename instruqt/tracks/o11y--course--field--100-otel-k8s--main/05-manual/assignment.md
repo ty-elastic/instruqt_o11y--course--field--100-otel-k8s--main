@@ -32,3 +32,24 @@ Navigate to the [button label="Source"](tab-2) tab and open `src/recorder-java/p
 
 Navigate to the [button label="Source"](tab-2) tab and open `src/recorder-java/src/main/java/com/example/recorder/Main.java`.
 Navigate to the [button label="Source"](tab-2) tab and open `src/recorder-java/src/main/java/com/example/recorder/TradeService.java`.
+
+## Adding instrumentation
+
+Modify `src/recorder-java/src/main/java/com/example/recorder/TradeService.java` like
+
+```java
+    public void auditSymbol(String symbol) {
+        Span span = tracer.spanBuilder("auditSymbol").startSpan();
+        try (Scope ignored = span.makeCurrent()) {
+            span.setAttribute(Main.ATTRIBUTE_PREFIX + "symbol", symbol);
+             log.info("trading symbol" + symbol);
+        } finally {
+            span.end();
+        }
+    }
+```
+
+And rebuild and deploy the `recorder-java` service:
+```bash,run
+./build.sh -d force -b true -s recorder-java
+```

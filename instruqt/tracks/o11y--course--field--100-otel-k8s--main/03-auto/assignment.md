@@ -39,3 +39,23 @@ Navigate to the [button label="Source"](tab-2) tab and open `src/recorder-java/D
 How did the agent know where to send spans? We have instructed the Kubernetes OTel Operator inject these variables automatically. We could have also defined them manually.
 
 Navigate to the [button label="Source"](tab-2) tab and open `k8s/yaml/recorder-java.yaml`.
+
+## Inferred Spans
+
+Let's add automatic inferred spans:
+
+Navigate to the [button label="Source"](tab-2) tab and open `src/recorder-java/Dockerfile`.
+
+Modify the Java startup to look like this:
+```Dockerfile
+EXPOSE 9003
+ENTRYPOINT ["java", \
+"-javaagent:edot-javaagent.jar", \
+"-Dotel.inferred.spans.enabled=true", "-Dotel.inferred.spans.sampling.interval=1ms", "-Dotel.inferred.spans.min.duration=0ms", "-Dotel.inferred.spans.included.classes=com.example.*", \
+"-jar", "/usr/src/app/recorder.jar"]
+```
+
+And rebuild and deploy the `recorder-java` service:
+```bash,run
+./build.sh -d force -b true -s recorder-java
+```
