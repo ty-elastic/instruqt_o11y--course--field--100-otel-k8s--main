@@ -1,0 +1,15 @@
+source /opt/workshops/elastic-retry.sh
+export $(curl http://kubernetes-vm:9000/env | xargs)
+
+export INSTRUQT_TRACK_SLUG=o11y--course--field--100-otel-k8s--main
+
+/opt/workshops/clone-code.sh -r ty-elastic/instruqt_$INSTRUQT_TRACK_SLUG -d false
+
+# ------------- OTEL
+
+source /workspace/workshop/instruqt/scripts/elastic-otel.sh
+
+# ------------- DEPLOY
+
+cd /workspace/workshop
+./build.sh -c $INSTRUQT_TRACK_SLUG -d true
