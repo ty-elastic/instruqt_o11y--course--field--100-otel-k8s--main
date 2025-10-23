@@ -57,5 +57,5 @@ ENTRYPOINT ["java", \
 
 And rebuild and deploy the `recorder-java` service:
 ```bash,run
-./build.sh -d force -b true -s recorder-java
+./build.sh -d force -b true -s recorder-java -l true
 ```

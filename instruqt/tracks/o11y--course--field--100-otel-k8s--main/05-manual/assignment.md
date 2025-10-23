@@ -51,5 +51,5 @@ Modify `src/recorder-java/src/main/java/com/example/recorder/TradeService.java` 
 
 And rebuild and deploy the `recorder-java` service:
 ```bash,run
-./build.sh -d force -b true -s recorder-java
+./build.sh -d force -b true -s recorder-java -l true
 ```
