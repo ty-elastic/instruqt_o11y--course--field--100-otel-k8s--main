@@ -1,0 +1,55 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: trading
+    service: trader
+  name: trader
+  namespace: $NAMESPACE
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: trading
+      service: trader
+  template:
+    metadata:
+      annotations:
+        instrumentation.opentelemetry.io/inject-python: "opentelemetry-operator-system/elastic-instrumentation"
+        resource.opentelemetry.io/service.version: "$SERVICE_VERSION"
+      labels:
+        app: trading
+        service: trader
+        app.kubernetes.io/version: "$SERVICE_VERSION"
+    spec:
+      tolerations:
+      - key: "REGION"
+        operator: "Equal"
+        value: "$REGION"
+        effect: "PreferNoSchedule"
+      containers:
+        - name: trader
+          image: $REPO/trader:$COURSE
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 9001
+      restartPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: trading
+    service: trader
+  name: trader
+  namespace: $NAMESPACE
+spec:
+  ports:
+    - name: trader
+      port: 9001
+      targetPort: 9001
+  selector:
+    app: trading
+    service: trader
+---

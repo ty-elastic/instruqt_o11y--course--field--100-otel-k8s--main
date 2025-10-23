@@ -1,0 +1,26 @@
+slug: o11y--course--field--100-otel-k8s--main
+id: hgppcik0t55y
+title: 'Observability 100: Using Elastic and OpenTelemetry to Observe Kubernetes'
+description: ""
+icon: ""
+tags:
+- otel-100
+owner: elastic
+developers:
+- tyrone.bekiares@elastic.co
+show_timer: true
+idle_timeout: 900
+timelimit: 7200
+sandbox_preset: managed-vm-elastic-9-1-3
+lab_config:
+  extend_ttl: 900
+  sidebar_enabled: true
+  feedback_recap_enabled: true
+  feedback_tab_enabled: false
+  loadingMessages:
+  - Setting up your Elastic experience...
+  theme:
+    name: modern-dark
+  override_challenge_layout: false
+  hideStopButton: false
+enhanced_loading: false
