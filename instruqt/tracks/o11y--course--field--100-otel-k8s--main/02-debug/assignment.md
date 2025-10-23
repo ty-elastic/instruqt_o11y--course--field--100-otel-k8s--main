@@ -19,7 +19,7 @@ tabs:
   title: Source
   type: code
   hostname: host-1
-  path: /workspace/workshop/src
+  path: /workspace/workshop/k8s/yaml
 difficulty: ""
 timelimit: 0
 lab_config:
@@ -30,35 +30,41 @@ enhanced_loading: null
 
 Let's describe one of our application pods... Specifically, the monkey pod:
 ```bash,run
-kubectl -n trading describe pod monkey
+kubectl -n trading-1 describe pod monkey
 ```
 Look at the environment variables section; note that there are not yet any OTel environment variables loaded into the pod.
 
 It turns out that after you apply the OTel Operator to your Kubernetes cluster, you need to restart all of your application services:
 ```bash,run
-kubectl  -n trading rollout restart deployment
+kubectl -n trading-1 rollout restart deployment
 ```
 
 Now let's wait for our monkey pod to restart:
 ```bash,run
-kubectl -n trading get pods
+kubectl -n trading-1 get pods
 ```
 
-And once it has restarted, let's describe it agaibn:
+And once it has restarted, let's describe it again:
 ```bash,run
-kubectl -n trading describe pod monkey
+kubectl -n trading-1 describe pod monkey
 ```
 
-And now we can see OTel ENV vars being injected into the monkey pod. Let's check if we have APM data flowing in. Navigate to the [button label="Elastic"](tab-0) tab and click on `Applications` > `Service Inventory`. Ok cool, this is starting to look good. Click on the `trader` app and look at the `POST /trade/request` transaction. Scroll down to the bottom (trace samples) and look at the waterfall graph. Notice the broken trace. It looks like perhaps one of our applications is not being instrumented. Click on the `POST` span and look at `attributes.service.target.name`. Note that this `POST` is intended to target the `router` service, yet we don't see the `router` service in our Service Map.
+And now we can see OTel ENV vars being injected into the monkey pod. Let's check if we have APM data flowing in. Navigate to the [button label="Elastic"](tab-0) tab and click on `Applications` > `Service Inventory`. Ok cool, this is starting to look good. 
+
+# Why is router not showing up?
+
+Click on the `trader` app and look at the `POST /trade/request` transaction. Scroll down to the bottom (trace samples) and look at the waterfall graph. Notice the broken trace. It looks like perhaps one of our applications is not being instrumented. Click on the `POST` span and look at `attributes.service.target.name`. Note that this `POST` is intended to target the `router` service, yet we don't see the `router` service in our Service Map.
 
 Let's look at our `router` pod and see if we can figure out what's up.
 ```bash,run
-kubectl -n trading describe pod router
+kubectl -n trading-1 describe pod router
 ```
 
 Huh. no OTel ENVs, even though the pod was restarted. Let's have a look at that deployment yaml. Click on the [button label="Code"](tab-2) button and examine the deployment yaml. Look at the deployment yaml for the `trader` service and compare it to the `router` service. Notice anything missing?
 
-In order for the Operator to attach the correct APM agent, you need to apply an appropriate annotation to each pod. Note that the router pod is missing an annotation. Let's add it. In the Code editor, modify the router yaml to add the following annotation:
+In order for the Operator to attach the correct APM agent, you need to apply an appropriate annotation to each pod. Note that the router pod is missing an annotation. Let's add it.  Navigate to the [button label="Source"](tab-2) tab and open `router.yaml`.
+
+Uncomment the `instrumentation.opentelemetry.io/inject-nodejs` directive:
 
 ```
 spec:
@@ -70,7 +76,7 @@ spec:
 ```
 And then reapply the yaml:
 ```bash,run
-kubectl apply -f k8s
+./build.sh -d true -s router
 ```
 
 Note that `router` was reconfigured:
@@ -80,13 +86,15 @@ deployment.apps/router configured
 
 Wait for the `router` pod to restart:
 ```bash,run
-kubectl -n trading get pods
+kubectl -n trading-1 get pods
 ```
 
 And once it has restarted, let's describe it again:
 ```bash,run
-kubectl -n trading describe pod router
+kubectl -n trading-1 describe pod router
 ```
 
-And now it looks like our OTel ENVs are getting injected as expected. Let's check Elasticsearch. Navigate to the [button label="Elastic"](tab-0) tab and click on `Applications` > `Service Inventory`. Note that we can now see a full distributed trace, as expected!
+And now it looks like our OTel ENVs are getting injected as expected. Let's check Elasticsearch. 
+
+Navigate to the [button label="Elastic"](tab-0) tab and click on `Applications` > `Service Inventory`. Note that we can now see a full distributed trace, as expected!
 
