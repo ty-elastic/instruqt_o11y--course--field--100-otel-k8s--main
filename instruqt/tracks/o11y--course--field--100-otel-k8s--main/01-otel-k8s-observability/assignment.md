@@ -15,13 +15,15 @@ tabs:
   type: terminal
   hostname: host-1
   workdir: /workspace/workshop
-- id: 4qcxxz95lkpr
+- id: tcgpla2ouph4
   title: Source
   type: code
   hostname: host-1
   path: /workspace/workshop/src
 difficulty: ""
 timelimit: 0
+lab_config:
+  custom_layout: '{"root":{"children":[{"branch":{"size":67,"children":[{"leaf":{"tabs":["cvuhdep6nf7c","tcgpla2ouph4"],"activeTabId":"cvuhdep6nf7c","size":82}},{"leaf":{"tabs":["wtymmwmcwnup"],"activeTabId":"wtymmwmcwnup","size":15}}]}},{"leaf":{"tabs":["assignment"],"activeTabId":"assignment","size":31}}],"orientation":"Horizontal"}}'
 enhanced_loading: null
 ---
 We have our application stack running on Kubernetes. Now let's observe it using Elastic!

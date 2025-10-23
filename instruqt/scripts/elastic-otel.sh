@@ -48,6 +48,11 @@ output=$(curl -s -X POST --header "Authorization: Basic $ELASTICSEARCH_AUTH_BASE
 
 ELASTICSEARCH_APIKEY=$(echo $output | jq -r '.encoded')
 
+# install ksm
+helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+helm repo update
+helm install --set namespaceOverride=kube-system kube-state-metrics prometheus-community/kube-state-metrics
+
 helm repo add open-telemetry 'https://open-telemetry.github.io/opentelemetry-helm-charts' --force-update
 
 kubectl create namespace $namespace
