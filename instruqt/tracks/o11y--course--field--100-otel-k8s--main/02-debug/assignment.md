@@ -76,7 +76,7 @@ spec:
 ```
 And then reapply the yaml:
 ```bash,run
-./build.sh -d true -s router
+./build.sh -d force -s router
 ```
 
 Note that `router` was reconfigured:

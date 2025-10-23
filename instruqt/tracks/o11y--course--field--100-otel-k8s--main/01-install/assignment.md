@@ -47,6 +47,11 @@ With the advent of the OpenTelemetry Operator and related Helm chart, you can no
 11. [button label="Terminal"](tab-1)
 12. Paste and run k8s commands to install OTel operator
 
+If you get an error saying that the current version of the `values.yaml` file is unavailable, run this command in the terminal:
+```bash,run
+helm upgrade --install opentelemetry-kube-stack open-telemetry/opentelemetry-kube-stack   --namespace opentelemetry-operator-system   --values 'https://raw.githubusercontent.com/elastic/elastic-agent/refs/tags/v9.1.4/deploy/helm/edot-collector/kube-stack/values.yaml'   --version '0.6.3'
+```
+
 ## Checking the Install
 
 First, list out the available namespaces:
@@ -55,13 +60,11 @@ kubectl get namespaces
 ```
 And get a list of pods running in the `opentelemetry-operator-system` namespace:
 ```bash,run
-kubectl  -n opentelemetry-operator-system get pods
+kubectl -n opentelemetry-operator-system get pods
 ```
 
-And let's look at the logs from the daemonset collector to see if it is exporting to Elasticsearch without error:
-```bash
-kubectl  -n opentelemetry-operator-system logs opentelemetry-kube-stack-gateway-collector-<xxxxxxxxxx-xxxxx>
-```
+And let's look at the logs from the daemonset collector to see if it is exporting to Elasticsearch without error...
+
 
 # Checking Observability
 

@@ -1,0 +1,7 @@
+source /opt/workshops/elastic-retry.sh
+export $(curl http://kubernetes-vm:9000/env | xargs)
+
+cd /workspace/workshop
+cp -rf instruqt/tracks/o11y--course--field--100-otel-k8s--main/challenges/02-debug/solve .
+
+./build.sh -d force -s router
