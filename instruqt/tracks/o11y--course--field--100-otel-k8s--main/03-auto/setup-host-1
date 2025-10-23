@@ -2,7 +2,6 @@ source /opt/workshops/elastic-retry.sh
 export $(curl http://kubernetes-vm:9000/env | xargs)
 
 cd /workspace/workshop
-cp -f src/recorder-java/_courses/o11y--course--field--100-otel-k8s--main/_challenges/03-auto/Dockerfile src/recorder-java/Dockerfile
-cp -f src/recorder-java/_courses/o11y--course--field--100-otel-k8s--main/_challenges/03-auto/recorder-java.yaml k8s/yaml/recorder-java.yaml
+cp -rf src/recorder-java/_courses/o11y--course--field--100-otel-k8s--main/_challenges/03-auto/setup .
 
 ./build.sh -d force -s recorder-java

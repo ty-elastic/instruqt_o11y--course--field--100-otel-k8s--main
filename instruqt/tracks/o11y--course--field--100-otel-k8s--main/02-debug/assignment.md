@@ -23,7 +23,7 @@ tabs:
 difficulty: ""
 timelimit: 0
 lab_config:
-  custom_layout: '{"root":{"children":[{"branch":{"size":67,"children":[{"leaf":{"tabs":["cvuhdep6nf7c","tcgpla2ouph4"],"activeTabId":"cvuhdep6nf7c","size":82}},{"leaf":{"tabs":["wtymmwmcwnup"],"activeTabId":"wtymmwmcwnup","size":15}}]}},{"leaf":{"tabs":["assignment"],"activeTabId":"assignment","size":31}}],"orientation":"Horizontal"}}'
+  custom_layout: '{"root":{"children":[{"branch":{"size":67,"children":[{"leaf":{"tabs":["l84sgyu76cnf","a7wfcgjqgvta"],"activeTabId":"l84sgyu76cnf","size":82}},{"leaf":{"tabs":["jxhyli2lawvz"],"activeTabId":"jxhyli2lawvz","size":15}}]}},{"leaf":{"tabs":["assignment"],"activeTabId":"assignment","size":31}}],"orientation":"Horizontal"}}'
 enhanced_loading: null
 ---
 # Debugging APM

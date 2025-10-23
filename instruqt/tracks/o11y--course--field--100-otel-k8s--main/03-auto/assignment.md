@@ -1,20 +1,21 @@
 ---
 slug: auto
+id: nktxseynvc2i
 type: challenge
 title: Automatic Instrumentation
 tabs:
-- id: l84sgyu76cnf
+- id: ygexxs6w6mfn
   title: Elasticsearch
   type: service
   hostname: kubernetes-vm
   path: /
   port: 30001
-- id: jxhyli2lawvz
+- id: 06ew3qjpy0ox
   title: Terminal
   type: terminal
   hostname: host-1
   workdir: /workspace/workshop
-- id: a7wfcgjqgvta
+- id: xef7bpck9pat
   title: Source
   type: code
   hostname: host-1
@@ -22,7 +23,7 @@ tabs:
 difficulty: ""
 timelimit: 0
 lab_config:
-  custom_layout: '{"root":{"children":[{"branch":{"size":67,"children":[{"leaf":{"tabs":["cvuhdep6nf7c","tcgpla2ouph4"],"activeTabId":"cvuhdep6nf7c","size":82}},{"leaf":{"tabs":["wtymmwmcwnup"],"activeTabId":"wtymmwmcwnup","size":15}}]}},{"leaf":{"tabs":["assignment"],"activeTabId":"assignment","size":31}}],"orientation":"Horizontal"}}'
+  custom_layout: '{"root":{"children":[{"branch":{"size":67,"children":[{"leaf":{"tabs":["ygexxs6w6mfn","xef7bpck9pat"],"activeTabId":"ygexxs6w6mfn","size":82}},{"leaf":{"tabs":["06ew3qjpy0ox"],"activeTabId":"06ew3qjpy0ox","size":15}}]}},{"leaf":{"tabs":["assignment"],"activeTabId":"assignment","size":31}}],"orientation":"Horizontal"}}'
 enhanced_loading: null
 ---
 # Automatic Instrumentation

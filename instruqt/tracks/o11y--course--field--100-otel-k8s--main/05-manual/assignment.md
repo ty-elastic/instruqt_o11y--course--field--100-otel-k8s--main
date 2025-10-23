@@ -1,20 +1,21 @@
 ---
 slug: manual
+id: j6ssy89xmfq7
 type: challenge
 title: Adding Manual Instrumentation
 tabs:
-- id: l84sgyu76cnf
+- id: zktw3svujerw
   title: Elasticsearch
   type: service
   hostname: kubernetes-vm
   path: /
   port: 30001
-- id: jxhyli2lawvz
+- id: 8vdntb5bahmc
   title: Terminal
   type: terminal
   hostname: host-1
   workdir: /workspace/workshop
-- id: a7wfcgjqgvta
+- id: tw3f0m3x2ztt
   title: Source
   type: code
   hostname: host-1
@@ -22,7 +23,7 @@ tabs:
 difficulty: ""
 timelimit: 0
 lab_config:
-  custom_layout: '{"root":{"children":[{"branch":{"size":67,"children":[{"leaf":{"tabs":["cvuhdep6nf7c","tcgpla2ouph4"],"activeTabId":"cvuhdep6nf7c","size":82}},{"leaf":{"tabs":["wtymmwmcwnup"],"activeTabId":"wtymmwmcwnup","size":15}}]}},{"leaf":{"tabs":["assignment"],"activeTabId":"assignment","size":31}}],"orientation":"Horizontal"}}'
+  custom_layout: '{"root":{"children":[{"branch":{"size":67,"children":[{"leaf":{"tabs":["zktw3svujerw","tw3f0m3x2ztt"],"activeTabId":"zktw3svujerw","size":82}},{"leaf":{"tabs":["8vdntb5bahmc"],"activeTabId":"8vdntb5bahmc","size":15}}]}},{"leaf":{"tabs":["assignment"],"activeTabId":"assignment","size":31}}],"orientation":"Horizontal"}}'
 enhanced_loading: null
 ---
 # Manual Instrumentation
