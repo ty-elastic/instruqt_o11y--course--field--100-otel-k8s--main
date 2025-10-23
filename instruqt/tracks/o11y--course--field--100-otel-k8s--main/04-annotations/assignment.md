@@ -40,7 +40,7 @@ Modify `src/recorder-java/src/main/java/com/example/recorder/TradeService.java` 
 
 ```java
     @WithSpan
-    public void auditCustomer(@SpanAttribute(Main.ATTRIBUTE_PREFIX + "trade") String customerId) {
+    public void auditCustomer(@SpanAttribute(Main.ATTRIBUTE_PREFIX + "customerId") String customerId) {
         log.info("trading for " + customerId);
     }
 ```

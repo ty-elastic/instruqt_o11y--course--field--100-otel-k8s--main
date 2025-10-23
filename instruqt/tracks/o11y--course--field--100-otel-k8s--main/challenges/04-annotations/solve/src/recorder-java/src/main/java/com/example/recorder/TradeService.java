@@ -24,7 +24,7 @@ public class TradeService {
     private final Tracer tracer;
 
     @WithSpan
-    public void auditCustomer(@SpanAttribute(Main.ATTRIBUTE_PREFIX + "trade") String customerId) {
+    public void auditCustomer(@SpanAttribute(Main.ATTRIBUTE_PREFIX + "customerId") String customerId) {
         log.info("trading for " + customerId);
     }
 

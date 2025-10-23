@@ -65,7 +65,6 @@ kubectl -n opentelemetry-operator-system get pods
 
 And let's look at the logs from the daemonset collector to see if it is exporting to Elasticsearch without error...
 
-
 # Checking Observability
 
 Let's confirm what signals are coming into Elastic.
