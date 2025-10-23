@@ -2,7 +2,3 @@ source /opt/workshops/elastic-retry.sh
 export $(curl http://kubernetes-vm:9000/env | xargs)
 
 source /workspace/workshop/instruqt/scripts/elastic-otel.sh
-
-cd /workspace/workshop
-git remote update
-git pull

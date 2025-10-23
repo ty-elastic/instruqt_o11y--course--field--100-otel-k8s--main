@@ -23,7 +23,7 @@ public class TradeService {
     }
 
     public void auditSymbol(String symbol) {
-        log.info("trading symbol" + symbol);
+        log.info("trading " + symbol);
     }
 
     @Async
