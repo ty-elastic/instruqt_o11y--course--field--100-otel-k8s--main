@@ -1,0 +1,77 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: trading
+    service: recorder-java
+  name: recorder-java
+  namespace: $NAMESPACE
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: trading
+      service: recorder-java
+  template:
+    metadata:
+      annotations:
+        instrumentation.opentelemetry.io/inject-sdk: "opentelemetry-operator-system/elastic-instrumentation"
+        resource.opentelemetry.io/service.version: "$SERVICE_VERSION"
+      labels:
+        app: trading
+        service: recorder-java
+        app.kubernetes.io/version: "$SERVICE_VERSION"
+    spec:
+      tolerations:
+      - key: "REGION"
+        operator: "Equal"
+        value: "$REGION"
+        effect: "PreferNoSchedule"
+      containers:
+        - name: recorder-java
+          env:
+            - name: POSTGRESQL_HOST
+              value: $POSTGRESQL_HOST
+            - name: POSTGRESQL_PASSWORD
+              value: $POSTGRESQL_PASSWORD
+            - name: POSTGRESQL_USER
+              value: $POSTGRESQL_USER
+            - name: POSTGRESQL_DBNAME
+              value: $POSTGRESQL_DBNAME
+            - name: POSTGRESQL_PROTOCOL
+              value: $POSTGRESQL_PROTOCOL
+            - name: POSTGRESQL_SETUP
+              value: $POSTGRESQL_SETUP
+            - name: POSTGRESQL_OPTIONS
+              value: $POSTGRESQL_OPTIONS
+            - name: POSTGRESQL_PORT
+              value: "$POSTGRESQL_PORT"
+            - name: POSTGRESQL_DIALECT
+              value: $POSTGRESQL_DIALECT
+
+            - name: NOTIFIER_ENDPOINT
+              value: $NOTIFIER_ENDPOINT
+          image: $REPO/recorder-java:$COURSE
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 9003
+      restartPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: trading
+    service: recorder-java
+  name: recorder-java
+  namespace: $NAMESPACE
+spec:
+  ports:
+    - name: recorder-java
+      port: 9003
+      targetPort: 9003
+  selector:
+    app: trading
+    service: recorder-java
+---

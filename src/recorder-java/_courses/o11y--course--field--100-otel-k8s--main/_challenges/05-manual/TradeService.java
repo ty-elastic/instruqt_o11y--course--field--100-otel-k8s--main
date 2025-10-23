@@ -8,6 +8,13 @@ import org.springframework.stereotype.Service;
 
 import java.util.concurrent.CompletableFuture;
 
+import io.opentelemetry.instrumentation.annotations.WithSpan;
+import io.opentelemetry.instrumentation.annotations.SpanAttribute;
+
+import io.opentelemetry.context.Scope;
+import io.opentelemetry.api.trace.Span;
+import io.opentelemetry.api.trace.Tracer;
+
 /**
  * Service layer is where all the business logic lies
  */
@@ -18,12 +25,21 @@ public class TradeService {
 	private final TradeNotifier tradeNotifier;
 	private final TradeRecorder tradeRecorder;
 
-    public void auditCustomer(String customerId) {
+    private final Tracer tracer;
+
+    @WithSpan
+    public void auditCustomer(@SpanAttribute(Main.ATTRIBUTE_PREFIX + "trade") String customerId) {
         log.info("trading for " + customerId);
     }
 
     public void auditSymbol(String symbol) {
-        log.info("trading symbol" + symbol);
+        Span span = tracer.spanBuilder("auditSymbol").startSpan();
+        try (Scope ignored = span.makeCurrent()) {
+            span.setAttribute(Main.ATTRIBUTE_PREFIX + "symbol", symbol);
+             log.info("trading symbol" + symbol);
+        } finally {
+            span.end();
+        }
     }
 
     @Async

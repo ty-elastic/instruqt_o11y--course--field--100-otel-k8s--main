@@ -35,11 +35,6 @@ public class TradeController {
 		@RequestParam(value = "action") String action) throws ExecutionException, InterruptedException {
 			Trade trade = new Trade(tradeId, customerId, symbol, shares, sharePrice, action);
 			
-			// intentionally thrash GC in NA region
-			// if (region.equals("EU") || region.equals("EMEA") || region.equals("APAC")) {
-			// 	Utilities.thrashGarbageCollector();
-			// }
-
 			CompletableFuture<Trade> resp = tradeService.processTrade(trade);
 
 			return ResponseEntity.ok().body(resp.get());

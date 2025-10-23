@@ -28,7 +28,7 @@ enhanced_loading: null
 ---
 We have our application stack running on Kubernetes. Now let's observe it using Elastic!
 
-## Install the OpenTelemetry Operator
+# Install the OpenTelemetry Operator
 
 With the advent of the OpenTelemetry Operator and related Helm chart, you can now easily deploy an entire observability signal collection package for Kubernetes, inclusive of:
 * application traces, metrics, and logs
@@ -63,7 +63,7 @@ And let's look at the logs from the daemonset collector to see if it is exportin
 kubectl  -n opentelemetry-operator-system logs opentelemetry-kube-stack-gateway-collector-<xxxxxxxxxx-xxxxx>
 ```
 
-## Checking Observability
+# Checking Observability
 
 Let's confirm what signals are coming into Elastic.
 

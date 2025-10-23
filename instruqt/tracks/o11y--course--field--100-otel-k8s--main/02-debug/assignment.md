@@ -49,7 +49,7 @@ And once it has restarted, let's describe it again:
 kubectl -n trading-1 describe pod monkey
 ```
 
-And now we can see OTel ENV vars being injected into the monkey pod. Let's check if we have APM data flowing in. Navigate to the [button label="Elastic"](tab-0) tab and click on `Applications` > `Service Inventory`. Ok cool, this is starting to look good. 
+And now we can see OTel ENV vars being injected into the monkey pod. Let's check if we have APM data flowing in. Navigate to the [button label="Elastic"](tab-0) tab and click on `Applications` > `Service Inventory`. Ok cool, this is starting to look good.
 
 # Why is router not showing up?
 
@@ -94,7 +94,7 @@ And once it has restarted, let's describe it again:
 kubectl -n trading-1 describe pod router
 ```
 
-And now it looks like our OTel ENVs are getting injected as expected. Let's check Elasticsearch. 
+And now it looks like our OTel ENVs are getting injected as expected. Let's check Elasticsearch.
 
 Navigate to the [button label="Elastic"](tab-0) tab and click on `Applications` > `Service Inventory`. Note that we can now see a full distributed trace, as expected!
 
