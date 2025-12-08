@@ -105,7 +105,7 @@ for current_region in "${regions[@]}"; do
         helm upgrade --install opentelemetry-kube-stack open-telemetry/opentelemetry-kube-stack \
         --namespace opentelemetry-operator-system \
         --values "values-$deploy_otel.yaml" \
-        --version '0.9.1'
+        --version '0.10.5'
         cd ..
 
         sleep 30
