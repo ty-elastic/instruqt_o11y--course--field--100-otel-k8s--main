@@ -47,11 +47,6 @@ With the advent of the OpenTelemetry Operator and related Helm chart, you can no
 11. [button label="Terminal"](tab-1)
 12. Paste and run k8s commands to install OTel operator
 
-If you get an error saying that the current version of the `values.yaml` file is unavailable, run this command in the terminal:
-```bash,run
-helm upgrade --install opentelemetry-kube-stack open-telemetry/opentelemetry-kube-stack   --namespace opentelemetry-operator-system   --values 'https://raw.githubusercontent.com/elastic/elastic-agent/refs/tags/v9.2.1/deploy/helm/edot-collector/kube-stack/values.yaml'   --version '0.10.5'
-```
-
 ## Checking the Install
 
 First, list out the available namespaces:
