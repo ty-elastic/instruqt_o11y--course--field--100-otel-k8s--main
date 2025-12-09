@@ -35,6 +35,13 @@ Navigate to the [button label="Source"](tab-2) tab and open `src/recorder-java/s
 
 ## Adding instrumentation
 
+Let's have a look at an existing trace in our `recorder-java` service. 
+
+1. Navigate to the [button label="Elastic"](tab-0) tab and click on `Applications` > `Service Inventory`
+2. Click on the `recorder-java` service
+3. Select the `POST /record` transaction
+4. Note that `auditSymbol` does not have `symbol` as a span attribute
+
 Modify `src/recorder-java/src/main/java/com/example/recorder/TradeService.java` like
 
 ```java
@@ -53,3 +60,10 @@ And rebuild and deploy the `recorder-java` service:
 ```bash,run
 ./build.sh -d force -b true -s recorder-java -l true
 ```
+
+And let's recheck our `recorder-java` service. 
+
+1. Navigate to the [button label="Elastic"](tab-0) tab and click on `Applications` > `Service Inventory`
+2. Click on the `recorder-java` service
+3. Select the `POST /record` transaction
+4. Note that `auditSymbol` has `symbol` as a span attribute

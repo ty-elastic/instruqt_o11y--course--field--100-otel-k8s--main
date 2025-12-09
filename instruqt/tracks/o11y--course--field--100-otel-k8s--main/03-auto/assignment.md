@@ -42,6 +42,13 @@ Navigate to the [button label="Source"](tab-2) tab and open `k8s/yaml/recorder-j
 
 ## Inferred Spans
 
+Inferred spans will automatically generate spans for function calls within your application. Let's have a look at an existing trace in our `recorder-java` service. 
+
+1. Navigate to the [button label="Elastic"](tab-0) tab and click on `Applications` > `Service Inventory`
+2. Click on the `recorder-java` service
+3. Select the `POST /record` transaction
+4. Note that `auditSymbol` is not a listed function
+
 Let's add automatic inferred spans:
 
 Navigate to the [button label="Source"](tab-2) tab and open `src/recorder-java/Dockerfile`.
@@ -59,3 +66,10 @@ And rebuild and deploy the `recorder-java` service:
 ```bash,run
 ./build.sh -d force -b true -s recorder-java -l true
 ```
+
+And let's recheck our `recorder-java` service. 
+
+1. Navigate to the [button label="Elastic"](tab-0) tab and click on `Applications` > `Service Inventory`
+2. Click on the `recorder-java` service
+3. Select the `POST /record` transaction
+4. Note that `auditSymbol` is now part of the E2E trace without us having to add manual instrumentation
