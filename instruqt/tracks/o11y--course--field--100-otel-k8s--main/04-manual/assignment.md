@@ -19,7 +19,7 @@ tabs:
   title: Source
   type: code
   hostname: host-1
-  path: /workspace/workshop
+  path: /workspace/workshop/src/recorder-java
 difficulty: ""
 timelimit: 0
 lab_config:
@@ -78,13 +78,15 @@ Rebuild and deploy the `recorder-java` service:
 ./build.sh -d force -b true -s recorder-java -l true
 ```
 
-And let's recheck our `recorder-java` service. 
+And let's recheck our `recorder-java` service.
 
 1. Navigate to the [button label="Elastic"](tab-0) tab and click on `Applications` > `Service Inventory`
 2. Click on the `recorder-java` service
 3. Select the `POST /record` transaction
-4. Click on the `auditSymbol` span
-5. Note that `auditSymbol` has `symbol` as a span attribute
+4. Click on the `auditCustomer` span
+5. Note that `auditCustomer` has `customerId` as a span attribute
 6. Close the flyout
-7. Click on the `auditCustomer` span
-8. Note that `auditCustomer` has `customerId` as a span attribute
+7. Click on the `auditSymbol` span
+8. Note that `auditSymbol` has `symbol` as a span attribute
+
+

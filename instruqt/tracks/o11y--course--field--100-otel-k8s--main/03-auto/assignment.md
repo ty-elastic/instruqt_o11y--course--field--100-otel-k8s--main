@@ -40,7 +40,7 @@ We've already made a few changes to note:
 1. manually download the EDOT Java SDK:
 ```nocopy
 ARG EDOT_VERSION=1.5.0
-RUN wget -O edot-javaagent.jar https://repo1.maven.org/maven2/co/elastic/otel/elastic-otel-javaagent/$EDOT_VERSION/elastic-otel-javaagent-$EDOT_VERSION.jar 
+RUN wget -O edot-javaagent.jar https://repo1.maven.org/maven2/co/elastic/otel/elastic-otel-javaagent/$EDOT_VERSION/elastic-otel-javaagent-$EDOT_VERSION.jar
 ```
 2. manually inject the SDK at runtime:
 ```nocopy
@@ -64,19 +64,19 @@ uh-oh; it looks like we stopped receiving traces from the `recorder-java` servic
 
 ## Debugging
 
-1. Switch to the [button label="Terminal"](tab-1) tab
-2. Let's look at logs from `recorder-java`
-3. Get pods
-```bash,run
-kubectl -n trading-1 get pods
-```
-4. Look for the instance of the `recorder-java` pod and get the logs:
-```bash,run
-kubectl -n trading-1 logs recorder-java-XXXX
-```
-5. Note the errors indicating an inability to export spans
+Let's have a look at the logs coming into Elastic: 
 
-Why is that?
+1. Open the [button label="Elasticsearch"](tab-0) tab
+2. Click `Discover` in the left-hand navigation pane
+3. Set the time picker to show the last 15 minutes
+4. Execute the following query:
+```esql
+FROM logs-*
+| WHERE service.name == "recorder-java"
+| WHERE body.text LIKE "* ERROR *"
+```
+
+Ah - it looks like the OTel SDK in the `recorder-java` service can't export telemetry to a collector. Why is that?
 
 We need to tell the OTel SDK where to send span data.
 
