@@ -11,6 +11,10 @@ import java.util.concurrent.CompletableFuture;
 import io.opentelemetry.instrumentation.annotations.WithSpan;
 import io.opentelemetry.instrumentation.annotations.SpanAttribute;
 
+import io.opentelemetry.context.Scope;
+import io.opentelemetry.api.trace.Span;
+import io.opentelemetry.api.trace.Tracer;
+
 /**
  * Service layer is where all the business logic lies
  */
@@ -21,8 +25,9 @@ public class TradeService {
 	private final TradeNotifier tradeNotifier;
 	private final TradeRecorder tradeRecorder;
 
-    @WithSpan
-    public void auditCustomer(@SpanAttribute(Main.ATTRIBUTE_PREFIX + "customerId") String customerId) {
+    private final Tracer tracer;
+
+    public void auditCustomer(String customerId) {
         log.info("trading for " + customerId);
     }
 
