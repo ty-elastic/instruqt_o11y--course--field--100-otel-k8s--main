@@ -26,7 +26,7 @@ ENV POSTGRESQL_DIALECT=PostgreSQLDialect
 
 ENV OTEL_SERVICE_NAME=recorder-java
 ENV OTEL_RESOURCE_ATTRIBUTES="service.version=1.0"
-#ENV OTEL_EXPORTER_OTLP_ENDPOINT=http://opentelemetry-kube-stack-daemon-collector.opentelemetry-operator-system.svc.cluster.local:4318
+ENV OTEL_EXPORTER_OTLP_ENDPOINT=http://opentelemetry-kube-stack-daemon-collector.opentelemetry-operator-system.svc.cluster.local:4318
 
 EXPOSE 9003
 ENTRYPOINT ["java", \

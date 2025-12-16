@@ -64,7 +64,7 @@ uh-oh; it looks like we stopped receiving traces from the `recorder-java` servic
 
 ## Debugging
 
-Let's have a look at the logs coming into Elastic: 
+Let's have a look at the logs coming into Elastic:
 
 1. Open the [button label="Elasticsearch"](tab-0) tab
 2. Click `Discover` in the left-hand navigation pane
