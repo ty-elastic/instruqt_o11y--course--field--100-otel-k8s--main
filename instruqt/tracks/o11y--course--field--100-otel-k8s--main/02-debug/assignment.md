@@ -80,7 +80,7 @@ And then reapply the yaml:
 ```
 
 Note that `router` was reconfigured:
-```
+```nocopy
 deployment.apps/router configured
 ```
 

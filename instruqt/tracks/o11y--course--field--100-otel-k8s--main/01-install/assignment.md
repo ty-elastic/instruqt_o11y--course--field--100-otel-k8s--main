@@ -64,10 +64,20 @@ And let's look at the logs from the daemonset collector to see if it is exportin
 
 Let's confirm what signals are coming into Elastic.
 
-First, let's check for logs. Navigate to the [button label="Elastic"](tab-0) tab and click on `Observability` > `Discover`.
+First, let's check for logs: 
+1. Navigate to the [button label="Elastic"](tab-0)
+2. Navigate to `Discover`
+3. Select `Try ES|QL`
+4. Execute the following query
+```esql
+FROM logs-*
+| WHERE k8s.namespace.name == "trading-1"
+```
 
-Next, let's check for infrastructure metrics. Navigate to the [button label="Elastic"](tab-0) tab and click on `Infrastructure` > `Hosts`.
+Next, let's check for infrastructure metrics:
+1. Navigate to`Infrastructure` > `Hosts`.
 
-Finally, let's check for application traces. Navigate to the [button label="Elastic"](tab-0) tab and click on `Applications` > `Service Inventory`. Note that there is not yet any APM data flowing in.
+Finally, let's check for application traces:
+1. Navigate to `Applications` > `Service Inventory`. 
 
-Let's figure out what's up.
+Note that there is not yet any APM data flowing in. Let's figure out what's up.
