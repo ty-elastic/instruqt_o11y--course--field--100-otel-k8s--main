@@ -92,13 +92,6 @@ Wait for the `recorder-java` pod to restart:
 kubectl -n trading-1 get pods
 ```
 
-And once it has restarted, let's describe it again:
-```bash,run
-kubectl -n trading-1 describe pod recorder-java
-```
-
-Note the presence of `OTEL_EXPORTER_OTLP_ENDPOINT`.
-
 Let's check if we are receiving span data:
 
 1. Open the [button label="Elasticsearch"](tab-0) tab

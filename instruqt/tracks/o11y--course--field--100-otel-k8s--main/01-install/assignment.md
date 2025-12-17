@@ -28,15 +28,18 @@ enhanced_loading: null
 ---
 We have our application stack running on Kubernetes. Now let's observe it using Elastic!
 
+At the bottom of your screen, you will find a terminal into a host with access to the K8s cluster on which your application stack is running.
+
 # Install the OpenTelemetry Operator
 
 With the advent of the OpenTelemetry Operator and related Helm chart, you can now easily deploy an entire observability signal collection package for Kubernetes, inclusive of:
 * application traces, metrics, and logs
 * infrastructure traces (nginx), metrics and logs
-* application and infrastructure metrics
 
-1. [button label="Elastic"](tab-0)
-2. Click `Add Data` in bottom-left pane
+To install the OpenTelemetry Operator to instrument your Kubernetes stack, execute the following steps:
+
+1. Select the [button label="Elastic"](tab-0) tab
+2. Click `Add Data` in bottom-left pane (`+` icon)
 3. Click `Kubernetes`
 4. Click `OpenTelemetry (Full Observability)`
 6. Click `Copy to clipboard` below `Add the OpenTelemetry repository to Helm`
@@ -64,7 +67,7 @@ And let's look at the logs from the daemonset collector to see if it is exportin
 
 Let's confirm what signals are coming into Elastic.
 
-First, let's check for logs: 
+First, let's check for logs:
 1. Navigate to the [button label="Elastic"](tab-0)
 2. Navigate to `Discover`
 3. Select `Try ES|QL`
@@ -75,9 +78,9 @@ FROM logs-*
 ```
 
 Next, let's check for infrastructure metrics:
-1. Navigate to`Infrastructure` > `Hosts`.
+1. Navigate to `Infrastructure` > `Hosts`.
 
 Finally, let's check for application traces:
-1. Navigate to `Applications` > `Service Inventory`. 
+1. Navigate to `Applications` > `Service Inventory`.
 
 Note that there is not yet any APM data flowing in. Let's figure out what's up.
