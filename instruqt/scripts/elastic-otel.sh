@@ -24,9 +24,10 @@ output=$(curl -s -X POST --header "Authorization: Basic $ELASTICSEARCH_AUTH_BASE
             "indices": [
             {
                 "names": [
-                "logs-*-*",
-                "metrics-*-*",
-                "traces-*-*"
+                    "logs*",
+                    "logs-*-*",
+                    "metrics-*-*",
+                    "traces-*-*"
                 ],
                 "privileges": [
                 "auto_configure",
@@ -58,5 +59,5 @@ kubectl create secret generic elastic-secret-otel \
 
 helm upgrade --install opentelemetry-kube-stack open-telemetry/opentelemetry-kube-stack \
   --namespace $namespace \
-  --values 'https://raw.githubusercontent.com/elastic/elastic-agent/refs/tags/v9.2.2/deploy/helm/edot-collector/kube-stack/values.yaml' \
-  --version '0.10.5'
+  --values 'https://raw.githubusercontent.com/elastic/elastic-agent/refs/tags/v9.4.1/deploy/helm/edot-collector/kube-stack/values.yaml' \
+  --version '0.12.4'

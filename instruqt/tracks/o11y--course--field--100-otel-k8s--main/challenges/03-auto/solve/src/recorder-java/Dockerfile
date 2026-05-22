@@ -9,7 +9,7 @@ FROM eclipse-temurin:17
 
 WORKDIR /usr/src/app
 
-ARG EDOT_VERSION=1.5.0
+ARG EDOT_VERSION=1.11.0
 RUN wget -O edot-javaagent.jar https://repo1.maven.org/maven2/co/elastic/otel/elastic-otel-javaagent/$EDOT_VERSION/elastic-otel-javaagent-$EDOT_VERSION.jar 
 
 COPY --from=build /usr/src/app/target/recorder-0.0.1-SNAPSHOT.jar /usr/src/app/recorder.jar
