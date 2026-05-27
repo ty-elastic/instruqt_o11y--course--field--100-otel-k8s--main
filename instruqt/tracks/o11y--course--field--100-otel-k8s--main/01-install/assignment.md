@@ -70,7 +70,7 @@ Let's confirm what signals are coming into Elastic.
 First, let's check for logs:
 1. Navigate to the [button label="Elastic"](tab-0)
 2. Navigate to `Discover`
-3. Select `Try ES|QL`
+3. Click on the 3 dots to the left of the `Save` button (upper-right) and select `ES|QL`
 4. Execute the following query
 ```esql
 FROM logs-*

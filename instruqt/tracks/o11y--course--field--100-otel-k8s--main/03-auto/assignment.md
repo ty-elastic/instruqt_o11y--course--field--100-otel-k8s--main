@@ -39,7 +39,7 @@ Navigate to the [button label="Dockerfile"](tab-2).
 We've already made a few changes to note:
 1. manually download the EDOT Java SDK:
 ```nocopy
-ARG EDOT_VERSION=1.5.0
+ARG EDOT_VERSION=1.11.0
 RUN wget -O edot-javaagent.jar https://repo1.maven.org/maven2/co/elastic/otel/elastic-otel-javaagent/$EDOT_VERSION/elastic-otel-javaagent-$EDOT_VERSION.jar
 ```
 2. manually inject the SDK at runtime:

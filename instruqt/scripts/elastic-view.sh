@@ -3,21 +3,25 @@ export $(curl http://kubernetes-vm:9000/env | xargs)
 
 /opt/workshops/elastic-view.sh -v oblt
 
-echo "Hide tour"
-hide_tour() {
-    local http_status=$(curl -s -o /dev/null -w "%{http_code}" -X POST "$KIBANA_URL/internal/kibana/settings" \
-    --header 'Content-Type: application/json' \
-    --header "kbn-xsrf: true" \
-    --header "Authorization: Basic $ELASTICSEARCH_AUTH_BASE64" \
-    --header 'x-elastic-internal-origin: Kibana' \
-    -d '{"changes":{"hideAnnouncements":true}}')
+hide_announcements() {
+   printf "$FUNCNAME...\n"
 
-    if echo $http_status | grep -q '^2'; then
-        echo "Disabled Tour: $http_status"
-        return 0
-    else
-        echo "Failed to disable Tour. HTTP status: $http_status"
-        return 1
-    fi
+   output=$(curl -s -X POST "$KIBANA_URL/internal/kibana/global_settings" \
+      -w "\n%{http_code}" \
+      -H 'kbn-xsrf: true' \
+      -H 'x-elastic-internal-origin: Kibana' \
+      -H "Authorization: Basic $ELASTICSEARCH_AUTH_BASE64" \
+      -H 'Content-Type: application/json' \
+      -d '{"changes":{"hideAnnouncements":true}}')
+
+   # Extract HTTP status code
+   http_code=$(echo "$output" | tail -n1)
+   http_response=$(echo "$output" | sed '$d')
+   if [ "$http_code" != "200" ]; then
+      printf "$FUNCNAME...ERROR $http_code: $http_response\n"
+      return 1
+   fi
+   printf "$FUNCNAME...SUCCESS\n"
+   return 0
 }
-retry_command_lin hide_tour
+retry_command_lin hide_announcements
