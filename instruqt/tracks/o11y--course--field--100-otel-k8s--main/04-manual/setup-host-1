@@ -4,5 +4,5 @@ export $(curl http://kubernetes-vm:9000/env | xargs)
 cd /workspace/workshop
 cp -rf instruqt/tracks/o11y--course--field--100-otel-k8s--main/challenges/04-manual/setup/* .
 
-./build.sh -d force -b true -s recorder-java -l true
+env -u BASH_ENV bash ./build.sh -d force -b true -s recorder-java -l true
 

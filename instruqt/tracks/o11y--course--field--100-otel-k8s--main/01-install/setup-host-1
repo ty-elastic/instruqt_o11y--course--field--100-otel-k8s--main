@@ -22,4 +22,4 @@ rm helm-v3.18.4-linux-amd64.tar.gz
 # ------------- DEPLOY
 
 cd /workspace/workshop
-./build.sh -c $INSTRUQT_TRACK_SLUG -d true
+env -u BASH_ENV bash ./build.sh -c $INSTRUQT_TRACK_SLUG -d true
